@@ -11,4 +11,6 @@
     <color name="secondary_pink">#FF3466</color>
     <color name="secondary_grey">#6D6D80</color>
     <color name="button_background_transparent">#00FFFFFF</color>
+    <color name="text_dark_background">#191926</color>
+    <color name="background_card_start">#00191926</color>
 </resources>
