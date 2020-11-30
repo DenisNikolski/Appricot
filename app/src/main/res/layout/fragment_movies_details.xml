@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_background">
@@ -37,63 +38,24 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/film_cover" />
 
-        <ImageView
-            android:id="@+id/image_star_1"
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/CustomRatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="9dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/image_film"
-            app:layout_constraintTop_toBottomOf="@+id/text_tag_line"
-            app:srcCompat="@drawable/star_icon_filled" />
-
-        <ImageView
-            android:id="@+id/image_star_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/image_star_1"
-            app:layout_constraintTop_toBottomOf="@+id/text_tag_line"
-            app:srcCompat="@drawable/star_icon_filled" />
-
-        <ImageView
-            android:id="@+id/image_star_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/image_star_2"
-            app:layout_constraintTop_toBottomOf="@+id/text_tag_line"
-            app:srcCompat="@drawable/star_icon_filled" />
-
-        <ImageView
-            android:id="@+id/image_star_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/image_star_3"
-            app:layout_constraintTop_toBottomOf="@+id/text_tag_line"
-            app:srcCompat="@drawable/star_icon_filled" />
-
-        <ImageView
-            android:id="@+id/image_star_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/image_star_4"
-            app:layout_constraintTop_toBottomOf="@+id/text_tag_line"
-            app:srcCompat="@drawable/star_icon_unfilled" />
+            android:layout_marginTop="17dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_tag_line" />
 
         <ImageView
             android:id="@+id/image_actor_1"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintStart_toStartOf="@+id/image_film"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toStartOf="@+id/image_actor_2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_cast_header"
             app:srcCompat="@drawable/actor_1" />
 
@@ -101,8 +63,9 @@
             android:id="@+id/image_actor_2"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             app:layout_constraintEnd_toStartOf="@+id/image_actor_3"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/image_actor_1"
             app:layout_constraintTop_toBottomOf="@+id/text_cast_header"
             app:srcCompat="@drawable/actor_2" />
@@ -111,8 +74,9 @@
             android:id="@+id/image_actor_3"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             app:layout_constraintEnd_toStartOf="@+id/image_actor_4"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/image_actor_2"
             app:layout_constraintTop_toBottomOf="@+id/text_cast_header"
             app:srcCompat="@drawable/actor_3" />
@@ -121,9 +85,10 @@
             android:id="@+id/image_actor_4"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/image_film"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/image_actor_3"
             app:layout_constraintTop_toBottomOf="@+id/text_cast_header"
             app:srcCompat="@drawable/actor_4" />
 
@@ -133,7 +98,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="254dp"
-            android:layout_marginEnd="200dp"
             android:text="@string/avengers_end_game"
             android:textColor="@color/white"
             android:textSize="40sp"
@@ -173,13 +137,13 @@
             android:id="@+id/text_review_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="12dp"
             android:text="@string/reviews"
             android:textAllCaps="true"
             android:textColor="@color/secondary_grey"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/image_star_5"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
             app:layout_constraintTop_toBottomOf="@+id/text_tag_line" />
 
         <TextView
