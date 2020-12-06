@@ -1,47 +1,45 @@
 package com.example.appricot
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import com.example.appricot.data.models.Film
 
-class FragmentMoviesList : Fragment() {
-    private var fragmentMoviesListClickListener: FragmentMoviesListClickListener? = null
+class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
+    private var filmsRecyclerView: RecyclerView? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
-        view?.findViewById<ImageView>(R.id.image_film_1)
-            ?.setOnClickListener {
-                fragmentMoviesListClickListener?.onFilmCardClick()
-            }
-
-        return view
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        filmsRecyclerView = view.findViewById<RecyclerView>(R.id.movies_list).apply {
+            adapter = FilmsAdapter(filmClickListener)
+            addItemDecoration(FilmItemMarginDecorator(16))
+        }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is FragmentMoviesListClickListener) {
-            fragmentMoviesListClickListener = context
-        }
+    override fun onStart() {
+        super.onStart()
+        (filmsRecyclerView?.adapter as? FilmsAdapter)?.bindFilms()
     }
 
     override fun onDetach() {
         super.onDetach()
-        fragmentMoviesListClickListener = null
+        filmsRecyclerView = null
+    }
+
+    private val filmClickListener = object : OnRecyclerItemClicked {
+        override fun onClick(film: Film) {
+            parentFragmentManager
+                .beginTransaction()
+                .addToBackStack(null)
+                .add(R.id.frame_layout, FragmentMoviesDetails.newInstance(film.id))
+                .commit()
+        }
     }
 
     companion object {
         fun newInstance(): FragmentMoviesList = FragmentMoviesList()
-    }
-
-    interface FragmentMoviesListClickListener {
-        fun onFilmCardClick()
     }
 }

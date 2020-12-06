@@ -13,4 +13,5 @@
     <color name="button_background_transparent">#00FFFFFF</color>
     <color name="text_dark_background">#191926</color>
     <color name="background_card_start">#00191926</color>
+    <color name="card_background">#212133</color>
 </resources>
