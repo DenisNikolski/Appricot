@@ -3,7 +3,8 @@ package com.example.appricot
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity(), FragmentMoviesList.FragmentMoviesListClickListener {
+class MainActivity : AppCompatActivity()
+{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -14,13 +15,5 @@ class MainActivity : AppCompatActivity(), FragmentMoviesList.FragmentMoviesListC
                 .add(R.id.frame_layout, FragmentMoviesList.newInstance())
                 .commit()
         }
-    }
-
-    override fun onFilmCardClick() {
-        supportFragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .add(R.id.frame_layout, FragmentMoviesDetails.newInstance())
-            .commit()
     }
 }

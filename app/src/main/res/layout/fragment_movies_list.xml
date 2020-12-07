@@ -28,105 +28,25 @@
             android:layout_marginTop="50dp"
             android:text="@string/movies_list_header"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/image_movies_list_header_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/film_card"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/movies_list"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="25dp"
-            app:cardBackgroundColor="#212133"
-            app:cardCornerRadius="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_movies_list_header">
-
-            <ImageView
-                android:id="@+id/image_film_1"
-                android:layout_width="166dp"
-                android:layout_height="246dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/movie_img_for_list"
-                app:srcCompat="@drawable/card_img_background" />
-
-            <TextView
-                android:id="@+id/text_list_age_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/rounded_corner"
-                android:text="@string/age_rate_13"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/image_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="150dp"
-                android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/like" />
-
-            <TextView
-                android:id="@+id/text_tag_line"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="210dp"
-                android:text="@string/action_adventure_fantasy"
-                android:textColor="@color/secondary_pink"
-                android:textSize="12sp" />
-
-            <RatingBar
-                android:id="@+id/ratingBar"
-                style="@style/CustomRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="9dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="235dp" />
-
-            <TextView
-                android:id="@+id/text_review_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="230dp"
-                android:text="@string/reviews"
-                android:textAllCaps="true"
-                android:textColor="@color/secondary_grey"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/text_card_film_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="260dp"
-                android:text="@string/avengers_end_game_line"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/text_film_length"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="285dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/film_length"
-                android:textAllCaps="true"
-                android:textColor="@color/secondary_grey"
-                android:textSize="12sp" />
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toBottomOf="@+id/text_movies_list_header"
+            app:spanCount="2"
+            tools:listitem="@layout/view_holder_movie" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
