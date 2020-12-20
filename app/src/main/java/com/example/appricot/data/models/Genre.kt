@@ -1,7 +1,6 @@
 package com.example.appricot.data.models
 
-data class Actor(
+data class Genre(
     val id: Int,
-    val name: String,
-    val img: String
+    val name: String
 )

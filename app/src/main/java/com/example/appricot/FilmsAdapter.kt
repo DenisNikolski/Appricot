@@ -1,10 +1,13 @@
 package com.example.appricot
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appricot.data.models.Film
-import com.example.appricot.domain.FilmsDataSource
+import com.example.appricot.data.models.loadMovies
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class FilmsAdapter(private val clickListener: OnRecyclerItemClicked) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -27,8 +30,12 @@ class FilmsAdapter(private val clickListener: OnRecyclerItemClicked) :
 
     override fun getItemCount(): Int = films.size
 
-    fun bindFilms() {
-        films = FilmsDataSource().getFilms()
+    suspend fun bindFilms(context: Context?) {
+        if (context != null) {
+            films = withContext(Dispatchers.Default) {
+                loadMovies(context)
+            }
+        }
         notifyDataSetChanged()
     }
 }

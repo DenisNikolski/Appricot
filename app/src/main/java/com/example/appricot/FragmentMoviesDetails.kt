@@ -1,9 +1,7 @@
 package com.example.appricot
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
@@ -12,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.appricot.data.models.Film
-import com.example.appricot.domain.FilmsDataSource
 
 class FragmentMoviesDetails : Fragment(R.layout.fragment_movies_details) {
     private var actorsRecyclerView: RecyclerView? = null
@@ -21,9 +18,7 @@ class FragmentMoviesDetails : Fragment(R.layout.fragment_movies_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val filmId = arguments?.getInt("filmId")
-        film = FilmsDataSource().getFilms().find { film -> film.id == filmId }!!
-
+        film = arguments?.getParcelable<Film>("film")!!
         bindFilmInfo(view)
         actorsRecyclerView = view.findViewById(R.id.actors_list)
         actorsRecyclerView?.adapter = ActorsAdapter(film.actors)
@@ -39,22 +34,22 @@ class FragmentMoviesDetails : Fragment(R.layout.fragment_movies_details) {
         val filmImageView: ImageView = view.findViewById(R.id.image_film)
 
         Glide.with(view.context)
-            .load(film.img_source)
+            .load(film.poster)
             .apply(imageOption)
             .into(filmImageView)
-        ageRateTextView.text = film.ageRate
+        ageRateTextView.text = "${film.ageRate}+"
         nameTextView.text = film.name
-        genresTextView.text = film.genres.joinToString(", ")
-        ratingBar.rating = film.rating
+        genresTextView.text = film.genres.joinToString(", ") { genre -> genre.name }
+        ratingBar.rating = film.rating / 2
         reviewScoreTextView.text = view.context.getString(R.string.reviews, film.reviewsAmount)
         descriptionTextView.text = film.description
     }
 
     companion object {
-        fun newInstance(filmId: Int): FragmentMoviesDetails {
+        fun newInstance(film: Film): FragmentMoviesDetails {
             return FragmentMoviesDetails().apply {
                 arguments = Bundle().apply {
-                    putInt("filmId", filmId)
+                    putParcelable("film", film)
                 }
             }
         }
