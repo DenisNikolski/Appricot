@@ -1,15 +1,17 @@
 package com.example.appricot
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appricot.data.models.Film
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
     private var filmsRecyclerView: RecyclerView? = null
+    private val scope = CoroutineScope(Dispatchers.Main)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,7 +23,9 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 
     override fun onStart() {
         super.onStart()
-        (filmsRecyclerView?.adapter as? FilmsAdapter)?.bindFilms()
+        scope.launch {
+            (filmsRecyclerView?.adapter as? FilmsAdapter)?.bindFilms(context)
+        }
     }
 
     override fun onDetach() {
@@ -34,7 +38,7 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
             parentFragmentManager
                 .beginTransaction()
                 .addToBackStack(null)
-                .add(R.id.frame_layout, FragmentMoviesDetails.newInstance(film.id))
+                .add(R.id.frame_layout, FragmentMoviesDetails.newInstance(film))
                 .commit()
         }
     }

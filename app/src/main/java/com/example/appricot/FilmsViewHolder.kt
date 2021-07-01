@@ -20,13 +20,13 @@ class FilmsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun onBind(film: Film) {
         Glide.with(itemView.context)
-            .load(film.img_source)
+            .load(film.backdrop)
             .apply(imageOption)
             .into(image)
 
-        ageRate.text = film.ageRate
-        genres.text = film.genres.joinToString(", ")
-        ratingBar.rating = film.rating
+        ageRate.text = "${film.ageRate}+"
+        genres.text = film.genres.joinToString(", ") { genre -> genre.name }
+        ratingBar.rating = film.rating / 2
         reviewScore.text = itemView.context.getString(R.string.reviews, film.reviewsAmount)
         title.text = film.name
         length.text = itemView.context.getString(R.string.film_length, film.length)
